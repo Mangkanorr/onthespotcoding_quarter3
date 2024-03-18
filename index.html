@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="heading"></h1>
+    <p id="date"></p>
+    <button onclick="question()">Start Quiz</button>
+    <p id="answer"></p>
+    <script>
+        var cont = 0
+        while (cont == 0) {
+            var name = prompt("What is your name: ", "");
+            cont = name.length;
+        }
+
+        var greeting = "Welcome to the Simple Math Quiz, " + name + "!";
+        document.getElementById("heading").innerHTML = greeting;
+        var date = new Date();
+        var dateMessage = "Today's Date and Time: " + date;
+        document.getElementById("date").innerHTML = dateMessage;
+        
+        function question() {
+            var numberOne = Math.round(Math.random() * 10);
+            var numberTwo = Math.round(Math.random() * 10);
+            var randomOperation = Math.round(Math.random() * 3);
+            var operation;
+
+            switch(randomOperation) {
+                case 0: 
+                    operation = "+";
+                    break;
+                case 1:
+                    operation = "-";
+                    break;
+                case 2:
+                    operation = "*";
+                    break;
+                case 3:
+                    operation = "/";
+                    break;
+            }
+
+            var number = true;
+            var empty = 0;
+
+            while ((number == true) || (empty == 0)) {
+                var answer = prompt("Hi Juan, let's solve a math problem. <br> What is " + numberOne + " " + operation + " " + numberTwo + "? <br> Enter your answer:", "");
+                number = isNaN(answer);
+                empty = answer.length;
+                if ((number == true) || (empty == 0)) {
+                    alert("Error! Your answer is invalid. Please enter a number.");
+                }
+            } 
+            
+            num1 = parseInt(numberOne);
+            num2 = parseInt(numberTwo);
+            var realAnswer = num1 + operation + num2; 
+
+            switch(operation) {
+                case '+':
+                    realAnswer = num1 + num2;
+                    break;
+                case '-':
+                    realAnswer = num1 - num2;
+                    break;
+                case '*':
+                    realAnswer = num1 * num2;
+                    break;
+                case '/':
+                    realAnswer = num1/num2;
+                    break;
+            }
+
+            var userAnswer = parseInt(answer);
+
+            if (answer == realAnswer) {
+            var answerMessage = "Congratulations, " + name + "! That's correct.";
+            document.getElementById("answer").innerHTML = answerMessage; }
+            else {
+            var answerMessage = "Congratulations, " + name + "! That's wrong. The answer is: " + realAnswer;
+            document.getElementById("answer").innerHTML = answerMessage; }
+        }
+
+
+        
+    </script>
+</body>
+</html>
